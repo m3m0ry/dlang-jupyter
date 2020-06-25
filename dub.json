@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"Jan Hönig"
+	],
+	"copyright": "Copyright © 2020, Jan Hönig",
+	"dependencies": {
+		"drepl": "~>0.2.1",
+		"jupyter_wire": "~>0.0.8"
+	},
+	"description": "Combination od drepl and jupyter_wire",
+	"license": "bsl",
+	"name": "dlang-jupyter"
+}
