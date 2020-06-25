@@ -1,2 +1,2 @@
 # dlang-jupyter
-Experimental repo for combining drepl and jupyter-wire
+Experimental repo for combining `drepl` and `jupyter_wire`.
