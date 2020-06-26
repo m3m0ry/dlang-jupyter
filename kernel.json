@@ -1,0 +1,8 @@
+{
+    "argv": [
+        "/home/hrom/git/d/dlang-jupyter/dlang-jupyter",
+        "{connection_file}"
+     ],
+    "display_name": "dlang-jupyter",
+    "language": "D"
+}
