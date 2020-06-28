@@ -26,6 +26,7 @@ struct DreplBackend
         intp = i;
     }
 
+    //ExecutionResult execute(in string code, scope IoPubMessageSender sender) @trusted
     ExecutionResult execute(in string code) @trusted
     {
         import std.conv : text;
