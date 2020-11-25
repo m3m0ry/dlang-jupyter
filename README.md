@@ -13,7 +13,7 @@ In order to use the kernel, you need `jupyter` installed. Then you need to make 
 Possible setup:
 - Install [conda](https://docs.anaconda.com/anaconda/install/)
 - (if necessary, export conda's path to be accesible with your shell. Conda has solutions for `bash`, `zsh`, `fish` and maybe other as well.)
-- Create new environment: `conda env -n dlang-jupyter`
+- Create new environment: `conda create -n dlang-jupyter`
 - Change to this environment: `conda activate dlang-jupyter`
 - Install jupyter: `conda install jupyter`
 - Set a link to this repository: `ln -s {REPOSITORY-PATH} {CONDA-PATH}/envs/dlang-jupyter/share/jupyter/kernels/dlang-jupyter`

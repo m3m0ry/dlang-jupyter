@@ -1,59 +1,11 @@
-import std.conv;
-import std.stdio;
-
 import std.exception : enforce;
 
-import drepl;
-import jupyter.wire.kernel;
-import jupyter.wire.message : CompleteResult;
+import drepl : interpreter, dmdEngine;
+import jupyter.wire.kernel : kernel;
 import jupyter.wire.log : log;
 
-class DreplException : Exception
-{
-    import std.exception : basicExceptionCtors;
+import backend : DreplBackend;
 
-    mixin basicExceptionCtors;
-}
-
-struct DreplBackend
-{
-
-    auto languageInfo = LanguageInfo("dlang", "2.92", ".d");
-    Interpreter!DMDEngine* intp;
-
-    this(Interpreter!DMDEngine* i)
-    {
-        intp = i;
-    }
-
-    //ExecutionResult execute(in string code, scope IoPubMessageSender sender) @trusted
-    ExecutionResult execute(in string code) @trusted
-    {
-        import std.conv : text;
-
-        auto res = intp.interpret(code);
-        writeln(res.stdout);
-        writeln(res.stderr);
-        final switch (res.state) with (InterpreterResult.State)
-        {
-        case incomplete:
-            throw new DreplException("Incomplete code");
-        case success:
-            return textResult(res.stdout);
-        case error:
-            throw new DreplException(res.stderr);
-        }
-    }
-
-    CompleteResult complete(string code, long cursorPos)
-    {
-        import std.algorithm : map, canFind;
-        import std.array : array;
-
-        CompleteResult ret;
-        return ret;
-    }
-}
 
 int main(string[] args)
 {
