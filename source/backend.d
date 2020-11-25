@@ -29,30 +29,25 @@ struct DreplBackend
     //ExecutionResult execute(in string code, scope IoPubMessageSender sender) @trusted
     ExecutionResult execute(in string code) @trusted
     {
-        immutable lines = code.splitLines.array;
-        auto result = textResult("Incomplete code: " ~ code);
-        int begin = 0;
-        int end = 1;
-        for(; end <= lines.length; ++end)
+        immutable kind = intp.classify(code);
+        switch(kind)
         {
-            auto part = lines[begin..end].join("/n");
-            if (intp.classify(part) != intp.Kind.Incomplete)
-            {
-                begin = end;
-                auto res = intp.interpret(part);
+            case intp.Kind.Incomplete:
+                return textResult("Incomplete code: " ~ code);
+            case intp.Kind.Error:
+                return textResult("Error: " ~ code);
+            default:
+                auto res = intp.interpret(code);
                 final switch (res.state) with (InterpreterResult.State)
                 {
                 case success:
-                    result = textResult(res.stdout ~ "\n" ~ res.stderr);
-                    break;
+                    return textResult(res.stdout ~ "\n" ~ res.stderr);
                 case incomplete:
-                    return textResult("Incomplete code: " ~ part);
+                    return textResult("Incomplete code: " ~ code);
                 case error:
                     return textResult(res.stdout ~ "\n" ~ res.stderr);
                 }
-            }
         }
-        return result;
     }
 
     CompleteResult complete(string code, long cursorPos)
